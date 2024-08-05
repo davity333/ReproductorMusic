@@ -26,6 +26,12 @@ function Playlist() {
         localStorage.setItem('cancionURL', url);   
     }
 
+    const eliminar = (cancion) => {
+        const nuevasCanciones = canciones.filter(item => item !== cancion);
+        setCanciones(nuevasCanciones);
+        
+    }
+    
     return (
         <div className="h-auto w-[90vh] ">
             <Box>
@@ -73,6 +79,7 @@ function Playlist() {
                                 <p className="text-yellow-50 text-[18px] pl-5">{cancion.name}</p>
                                 <p className="text-cyan-300 pl-6 flex justify-start">Play</p>
                             </div>
+                            <button onClick={() =>eliminar(cancion)} className="cursor-pointer hover:bg-[#d5caca39] h-7 rounded-xl px-2 m-4" title="Eliminar cancion">Eliminar</button>
                         </div>
                     ))
                 )}
