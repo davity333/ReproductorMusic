@@ -20,7 +20,9 @@ function Playlist() {
     }
 
     const reproducir = (nombreCancion) =>{
-        setCancionSeleccionada(nombreCancion);  
+        setCancionSeleccionada(nombreCancion); 
+        const url = URL.createObjectURL(nombreCancion); // Crear la URL del archivo de audio
+        localStorage.setItem('cancionURL', url);   
     }
     
 
@@ -53,7 +55,7 @@ function Playlist() {
                     </div>
                 ) : (
                     canciones.map((cancion, key) => (    
-                        <button key={key}
+                        <div key={key}
                         onClick={() => reproducir(cancion.name)}
                         className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4" 
                         title="Reproducir canción">
@@ -62,7 +64,7 @@ function Playlist() {
                             <p className="text-yellow-50 text-[18px] pl-5">{cancion.name}</p>
                             <p className="text-cyan-300 pl-6 flex justify-start">Play</p>
                             </div>
-                        </button>
+                        </div>
                         
                     ))
                 )}

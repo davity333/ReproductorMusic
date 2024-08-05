@@ -7,6 +7,7 @@ import { getCancionSeleccionada } from "../atoms/NameText";
 
 function Reproductor() {
   const [nombreCancion, setNombreCancion] = useState(getCancionSeleccionada());
+  
 
 
   useEffect(() => {

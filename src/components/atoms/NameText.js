@@ -1,4 +1,5 @@
 let cancionSeleccionada = null;
+let cancionReproducir = null;
 
 const setCancionSeleccionada = (nombre) => {
   cancionSeleccionada = nombre;
@@ -8,4 +9,12 @@ const getCancionSeleccionada = () => {
   return cancionSeleccionada;
 };
 
-export { setCancionSeleccionada, getCancionSeleccionada };
+const setCancionReproducir = (nombre) =>{
+    cancionReproducir = nombre;
+}
+
+const getCancionReproducir = () =>{
+    return cancionReproducir;
+}
+
+export { setCancionSeleccionada, getCancionSeleccionada, setCancionReproducir, getCancionReproducir };
