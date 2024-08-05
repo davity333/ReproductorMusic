@@ -7,71 +7,80 @@ import { setCancionSeleccionada } from '../atoms/NameText';
 function Playlist() {
     const fileInput = useRef(null);
     const [canciones, setCanciones] = useState([]);
-    
-    const subirMusica = () =>{
+    const [currentAudioUrl, setCurrentAudioUrl] = useState('');
+
+    const subirMusica = () => {
         document.getElementById("file").click();
     }
 
-    const fileAudios = (event) =>{
+    const fileAudios = (event) => {
         const getaudios = event.target.files;
         const newCanciones = Array.from(getaudios).filter(file => file.type.startsWith('audio/'));
         setCanciones(prevCanciones => [...prevCanciones, ...newCanciones]);
-        console.log(canciones)
+        console.log('Archivos seleccionados:', newCanciones);
     }
 
-    const reproducir = (nombreCancion) =>{
-        setCancionSeleccionada(nombreCancion); 
-        const url = URL.createObjectURL(nombreCancion); // Crear la URL del archivo de audio
+    const reproducir = (cancion) =>{
+        setCancionSeleccionada(cancion.name); 
+        const url = URL.createObjectURL(cancion); 
         localStorage.setItem('cancionURL', url);   
     }
-    
 
-    return ( 
-        <>
+    return (
         <div className="h-auto w-[90vh] ">
-        <Box>
-            <div className="flex items-center justify-center">
-            <hr className=" border w-[80vh] opacity-35"/>
-            </div>
+            <Box>
+                <div className="flex items-center justify-center">
+                    <hr className="border w-[80vh] opacity-35" />
+                </div>
 
-            <div className="flex justify-between p-8">
-                <img src={logo} alt="logo" className="w-14 h-14"/>
-                <p className="flex justify-center text-[20px] text-red-100 mt-3">Nombre de la lista</p>
-                <img src={subir} onClick={subirMusica} alt="logo" title="Subir cancion"
-                className="w-14 h-14 cursor-pointer hover:bg-[#506e8679]"/>
-                
-                
-                <input 
-                type="file"
-                 id="file" className="hidden"
-                 accept="audio/*"
-                 onChange={fileAudios}
-                 ref={fileInput} multiple/>
-            </div>
+                <div className="flex justify-between p-8">
+                    <img src={logo} alt="logo" className="w-14 h-14" />
+                    <p className="flex justify-center text-[20px] text-red-100 mt-3">Nombre de la lista</p>
+                    <img 
+                        src={subir} 
+                        onClick={subirMusica} 
+                        alt="Subir canción" 
+                        title="Subir canción"
+                        className="w-14 h-14 cursor-pointer hover:bg-[#506e8679]" 
+                    />    
+                    <input 
+                        type="file"
+                        id="file" 
+                        className="hidden"
+                        accept="audio/*"
+                        onChange={fileAudios}
+                        ref={fileInput} 
+                        multiple
+                    />
+                </div>
 
-            {canciones.length === 0 ? (
+                {canciones.length === 0 ? (
                     <div className="p-6">
-                        <p className="text-yellow-50 text-[18px] pl-5 text-center">Lista vacia</p>
+                        <p className="text-yellow-50 text-[18px] pl-5 text-center">Lista vacía</p>
                     </div>
                 ) : (
-                    canciones.map((cancion, key) => (    
-                        <div key={key}
-                        onClick={() => reproducir(cancion.name)}
-                        className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4" 
-                        title="Reproducir canción">
-                            <img src={disco} alt="disco" className="w-12 h-12"/>
-                            <div className=" col-span-2">
-                            <p className="text-yellow-50 text-[18px] pl-5">{cancion.name}</p>
-                            <p className="text-cyan-300 pl-6 flex justify-start">Play</p>
+                    
+                    canciones.map((cancion, key) => (
+                        <div 
+                            key={key}
+                            onClick={() => reproducir(cancion)}
+                            className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4
+                            "
+                            title="Reproducir canción"
+                        >
+                            <img src={disco} alt="disco" className="w-12 h-12" />
+                            <div className="col-span-2">
+                                <p className="text-yellow-50 text-[18px] pl-5">{cancion.name}</p>
+                                <p className="text-cyan-300 pl-6 flex justify-start">Play</p>
                             </div>
                         </div>
-                        
                     ))
                 )}
-        </Box>
+
+            </Box>
         </div>
-        </>
-     );
+    );
 }
+
 
 export default Playlist;
