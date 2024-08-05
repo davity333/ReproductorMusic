@@ -3,12 +3,10 @@ import subir from "/subir.webp.png"
 import logo from "/logoMusica.png"
 import disco from "/disco.png"
 import { useRef, useState, useEffect } from "react";
-import Reproductor from "./Reproductor";
-import Button from "../atoms/Button";
-function Playlist({props}) {
+import { setCancionSeleccionada } from '../atoms/NameText';
+function Playlist() {
     const fileInput = useRef(null);
     const [canciones, setCanciones] = useState([]);
-    const [cancionSeleccionada, setCancionSeleccionada] = useState(null);
     
     const subirMusica = () =>{
         document.getElementById("file").click();
@@ -22,14 +20,9 @@ function Playlist({props}) {
     }
 
     const reproducir = (nombreCancion) =>{
-        setCancionSeleccionada(nombreCancion);
+        setCancionSeleccionada(nombreCancion);  
     }
     
-    useEffect(() => {
-        if (cancionSeleccionada) {
-            console.log(`${cancionSeleccionada}`);
-        }
-    }, [cancionSeleccionada]);
 
     return ( 
         <>
@@ -59,18 +52,17 @@ function Playlist({props}) {
                         <p className="text-yellow-50 text-[18px] pl-5 text-center">Lista vacia</p>
                     </div>
                 ) : (
-                    canciones.map((cancion, key) => (
-                        
-                        <div key={key}
+                    canciones.map((cancion, key) => (    
+                        <button key={key}
                         onClick={() => reproducir(cancion.name)}
-                        className="pl-5 flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4" 
+                        className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4" 
                         title="Reproducir canción">
                             <img src={disco} alt="disco" className="w-12 h-12"/>
                             <div className=" col-span-2">
                             <p className="text-yellow-50 text-[18px] pl-5">{cancion.name}</p>
-                            <button className="text-cyan-300 pl-5">Play</button>
+                            <p className="text-cyan-300 pl-6 flex justify-start">Play</p>
                             </div>
-                        </div>
+                        </button>
                         
                     ))
                 )}
