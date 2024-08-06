@@ -2,12 +2,12 @@ import Box from "../atoms/Box";
 import subir from "/subir.webp.png"
 import logo from "/logoMusica.png"
 import disco from "/disco.png"
+import lapiz from "/lapiz.png"
 import { useRef, useState, useEffect } from "react";
 import { setCancionSeleccionada } from '../atoms/NameText';
 function Playlist() {
     const fileInput = useRef(null);
     const [canciones, setCanciones] = useState([]);
-    const [currentAudioUrl, setCurrentAudioUrl] = useState('');
 
     const subirMusica = () => {
         document.getElementById("file").click();
@@ -29,19 +29,22 @@ function Playlist() {
     const eliminar = (cancion) => {
         const nuevasCanciones = canciones.filter(item => item !== cancion);
         setCanciones(nuevasCanciones);
-        
     }
-    
+
     return (
-        <div className="h-auto w-[90vh] ">
+        <div className="h-auto w-[50vh] sm:h-auto sm:w-[90vh] max-[390px]:w-[40vh]">
             <Box>
                 <div className="flex items-center justify-center">
                     <hr className="border w-[80vh] opacity-35" />
                 </div>
 
-                <div className="flex justify-between p-8">
+                <div className="flex justify-around p-8">
                     <img src={logo} alt="logo" className="w-14 h-14" />
-                    <p className="flex justify-center text-[20px] text-red-100 mt-3">Nombre de la lista</p>
+
+                    <div className="flex col-span-1 cursor-pointer">
+                    <p className="flex justify-center text-[20px] text-red-100 mt-3 font-bold">Nombre de la lista</p>
+                    <img src={lapiz} alt="logo"  className="h-5 pl-3 mt-4"/>
+                    </div>
                     <img 
                         src={subir} 
                         onClick={subirMusica} 
@@ -60,6 +63,7 @@ function Playlist() {
                     />
                 </div>
 
+<div className="overflow-y-auto max-h-52 bg-[#4d474740] shadow-[inset_0px_20px_48px_-25px_rgba(0,0,0,0.11)]">
                 {canciones.length === 0 ? (
                     <div className="p-6">
                         <p className="text-yellow-50 text-[18px] pl-5 text-center">Lista vacía</p>
@@ -70,8 +74,7 @@ function Playlist() {
                         <div 
                             key={key}
                             onClick={() => reproducir(cancion)}
-                            className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4
-                            "
+                            className="pl-5 w-full flex col-span-1 hover:bg-[#514e4e] cursor-pointer pb-4 pt-4 "
                             title="Reproducir canción"
                         >
                             <img src={disco} alt="disco" className="w-12 h-12" />
@@ -83,7 +86,8 @@ function Playlist() {
                         </div>
                     ))
                 )}
-
+                </div>
+                        
             </Box>
         </div>
     );
