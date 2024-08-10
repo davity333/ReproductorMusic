@@ -1,11 +1,11 @@
 import Box from "../atoms/Box";
 import Playlist from "../molecules/Playlist";
 
-function PlayListMusic() {
+function PlayListMusic({onClick}) {
     return ( 
         <>
             <div className="flex justify-center ">
-            <Playlist></Playlist>
+            <Playlist onClick={onClick}></Playlist>
             </div>
         </>
      );

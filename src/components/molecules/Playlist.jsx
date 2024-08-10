@@ -5,7 +5,7 @@ import disco from "/disco.png"
 import lapiz from "/lapiz.png"
 import { useRef, useState, useEffect } from "react";
 import { setCancionSeleccionada } from '../atoms/NameText';
-function Playlist() {
+function Playlist({onClick}) {
     const fileInput = useRef(null);
     const [canciones, setCanciones] = useState([]);
 
@@ -41,7 +41,7 @@ function Playlist() {
                 <div className="flex justify-around p-8">
                     <img src={logo} alt="logo" className="w-14 h-14" />
 
-                    <div className="flex col-span-1 cursor-pointer">
+                    <div className="flex col-span-1 cursor-pointer" onClick={onClick}>
                     <p className="flex justify-center text-[20px] text-red-100 mt-3 font-bold">Nombre de la lista</p>
                     <img src={lapiz} alt="logo"  className="h-5 pl-3 mt-4"/>
                     </div>
