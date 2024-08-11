@@ -3,7 +3,7 @@ function CuadroModal({onClick}) {
         <>
         
         <div className="fixed inset-0 bg-black bg-opacity-0 backdrop-blur-sm flex justify-center items-center">
-            <div className="bg-white h-[50%] w-[40%] rounded">  
+            <div className="bg-[#94a6b9] h-[50%] w-[40%] rounded">  
             <p className="text-2xl text-center pt-11">Ingresa el nombre de la PlayList</p>
 
             <div className="flex justify-center items-center">
